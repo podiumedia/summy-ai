@@ -11,7 +11,6 @@ root.render(
 <HashRouter basename='/summy-ai'>
       <Routes>
       <Route path="/" element={<App />} />
-      <Route path="/summy-ai" element={<App />} />
     </Routes>
     </HashRouter>
   </React.StrictMode>
