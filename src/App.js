@@ -221,7 +221,8 @@ function App() {
     <AppBar className="appBar" position="static" sx={{  background: "linear-gradient(135deg, #667eea, #764ba2, #6B8DD6)"
           }}      elevation={0} variant="outlined">
       <Toolbar>
-        <img height={40} src="/professional.png"></img>
+        <img height={40} src={`3/professional.png`}></img>
+        
         <Typography variant="h5" style={{letterSpacing:.5}}>
           {botName.toUpperCase()}
         </Typography>
@@ -404,7 +405,7 @@ const SwipeToggle = (props) => {
     <ButtonBase onClick={() => handleChangeIndex(index + 1)} sx={{ml:1, mr:1}}>
         
 
-        <img height={30} style={{margin:5}} src="/professional.png"/>
+        <img height={30} style={{margin:5}} src="professional.png"/>
 
         <Typography variant="h6" style={{ fontStyle: "italic", fontWeight:700 }}>{botName} read your comments...</Typography>
 
@@ -433,16 +434,6 @@ const SwipeToggle = (props) => {
   );
 };
 
-const TopBar = () => {
-  return (
-    <AppBar position="fixed" sx={{  background: "linear-gradient(135deg, #667eea, #764ba2, #6B8DD6)"
-          }}      elevation={0} variant="outlined">
-      <Toolbar>
-        <img height={65} src="/arilogo.png"></img>
-      </Toolbar>
-    </AppBar>
-  );
-};
 
 function addLineBreaksToSentenceEnds(text) {
   // Use a regular expression to find sentence-ending punctuation and add a line break

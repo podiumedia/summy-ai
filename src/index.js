@@ -8,11 +8,12 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-
-    <Routes>
+<HashRouter basename='/summy-ai'>
+      <Routes>
       <Route path="/" element={<App />} />
+      <Route path="/summy-ai" element={<App />} />
     </Routes>
-    
+    </HashRouter>
   </React.StrictMode>
 );
 
