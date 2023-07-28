@@ -37,3 +37,15 @@ code {
   background-color: #502081; /* Change to your desired color */
   border-radius: 10px;
 }
+
+@font-face {
+  font-family: "Poppins";
+  src: url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+  font-display: swap;
+}
+
+@font-face{
+  font-family: "Open Sans";
+  src: url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap");
+  font-display: swap;
+}
