@@ -25,9 +25,9 @@ const StyledAvatar = styled(Avatar)`
   margin-bottom: 20px;
 `;
 
-const SupportiveAvatar = <Avatar src="/supportive.png" alt="Supportive" />;
-const ProfessionalAvatar = <Avatar src="/professional.png" alt="Professional" />;
-const CriticalAvatar = <Avatar src="/critical.png" alt="Critical" />;
+const SupportiveAvatar = <Avatar src="supportive.png" alt="Supportive" />;
+const ProfessionalAvatar = <Avatar src="professional.png" alt="Professional" />;
+const CriticalAvatar = <Avatar src="critical.png" alt="Critical" />;
 
 const characters = {
   "Supportive": SupportiveAvatar,
@@ -37,9 +37,9 @@ const characters = {
 
 const charactersSize = (size) =>{
   return {
-  "Supportive" :  <Avatar sx={{height:size, width:size}} src="/supportive.png" alt="Supportive" />,
-  "Professional": <Avatar sx={{height:size, width:size}} src="/professional.png" alt="Professional" />,
-  "Critical": <Avatar  sx={{height:size, width:size}} src="/critical.png" alt="Critical" />
+  "Supportive" :  <Avatar sx={{height:size, width:size}} src="supportive.png" alt="Supportive" />,
+  "Professional": <Avatar sx={{height:size, width:size}} src="professional.png" alt="Professional" />,
+  "Critical": <Avatar  sx={{height:size, width:size}} src="critical.png" alt="Critical" />
   }
 }
 
@@ -221,7 +221,7 @@ function App() {
     <AppBar className="appBar" position="static" sx={{  background: "linear-gradient(135deg, #667eea, #764ba2, #6B8DD6)"
           }}      elevation={0} variant="outlined">
       <Toolbar>
-        <img height={40} src={`3/professional.png`}></img>
+        <img height={40} src={`professional.png`}></img>
         
         <Typography variant="h5" style={{letterSpacing:.5}}>
           {botName.toUpperCase()}
