@@ -198,6 +198,9 @@ function App() {
 
   
   return (
+    <div style={{  background: "linear-gradient(210deg, #667eea, #764ba2, #6B8DD6)",
+    animation: "gradient 15s ease infinite"}}>
+      <div className="container">
     <ThemeProvider theme={theme}>
 
     <FullPage style={{  
@@ -325,6 +328,7 @@ function App() {
 
       </FullPage>
     </ThemeProvider>
+    </div></div>
   );
 }
 

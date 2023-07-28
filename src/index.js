@@ -3,16 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <div style={{  background: "linear-gradient(210deg, #667eea, #764ba2, #6B8DD6)",
-  animation: "gradient 15s ease infinite"}}>
-    <div className="container">
-    <App />
-    </div>
-    </div>
+
+    <Routes>
+      <Route path="/" element={<App />} />
+    </Routes>
+    
   </React.StrictMode>
 );
 
