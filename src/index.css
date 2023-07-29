@@ -18,7 +18,7 @@ code {
 }
 
 .appBar{
-  width:"fit-content";
+  width:fit-content;
   top:0;
   left:0;
 }

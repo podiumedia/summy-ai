@@ -18,6 +18,8 @@ import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
 const botName = "Summy";
 
+
+
 const StyledAvatar = styled(Avatar)`
   width: 100px;
   height: 100px;
@@ -25,23 +27,20 @@ const StyledAvatar = styled(Avatar)`
   margin-bottom: 20px;
 `;
 
-const SupportiveAvatar = <Avatar src="supportive.png" alt="Supportive" />;
-const ProfessionalAvatar = <Avatar src="professional.png" alt="Professional" />;
-const CriticalAvatar = <Avatar src="critical.png" alt="Critical" />;
-
-const characters = {
-  "Supportive": SupportiveAvatar,
-  "Professional": ProfessionalAvatar,
-  "Critical": CriticalAvatar,
-}
-
-const charactersSize = (size) =>{
+const charactersSize = (size) => {
   return {
-  "Supportive" :  <Avatar sx={{height:size, width:size}} src="supportive.png" alt="Supportive" />,
-  "Professional": <Avatar sx={{height:size, width:size}} src="professional.png" alt="Professional" />,
-  "Critical": <Avatar  sx={{height:size, width:size}} src="critical.png" alt="Critical" />
+    "Supportive": <Avatar sx={{ fontSize: size }} alt="Supportive" >💟</Avatar>,
+    "Professional": <Avatar sx={{ height: size, width: size }} src="professional.png" alt="Professional" />,
+    "Critical": <Avatar sx={{ height: size, width: size }} src="critical.png" alt="Critical" />
   }
 }
+
+
+const characterEmojis = {
+  "Supportive": "🤗",
+  "Professional": "👩‍💼",
+  "Critical": "😡"
+};
 
 
 
@@ -51,32 +50,38 @@ const theme = createTheme({
       'Poppins',
       'sans-serif',
     ].join(','),
-    caption:  {
+    caption: {
       fontSize: '0.7rem',
       fontWeight: 400,
       lineHeight: 1.66,
     },
-    h5:{
+    h4: {
+      fontSize: '1.5rem',
+      fontWeight: 700,
+      letterSpacing: 1,
+      color:"#222"
+    },
+    h5: {
       fontSize: '1rem',
       fontWeight: 700,
-      color:"white"
     },
-    h6:{
+    h6: {
       fontSize: '1rem',
+      color:"#222"
     },
     body2: {
       fontSize: '0.875rem',
       fontWeight: 500,
       lineHeight: 1.66,
     },
-    body1:{
+    body1: {
       fontSize: '1rem',
       fontFamily: [
         'Open Sans',
         'sans-serif',
       ].join(','),
     },
-    subtitle1:{
+    subtitle1: {
       fontSize: '1rem',
       fontFamily: [
         'Open Sans',
@@ -85,7 +90,7 @@ const theme = createTheme({
     }
   },
 
-  
+
   palette: {
     primary: {
       main: '#8a23fe', // Custom primary color
@@ -123,7 +128,7 @@ const CustomSlider = muiStyled(Slider)(({ theme }) => ({
   '& .MuiSlider-rail': {
     height: 10,
     borderRadius: 5,
-    opacity:1,
+    opacity: 1,
     background: 'linear-gradient(to right, #008547, orange, #960000)',
   },
 }));
@@ -153,7 +158,7 @@ const GlassmorphicContainer = styled.div`
 
 const FullPage = styled.div`
 height: 100vh;
-background-color: #ffffff;
+background-color: #fefefe;
 overflow: hidden; 
 `;
 
@@ -180,7 +185,7 @@ function App() {
 
   const embedUrl = `https://www.tiktok.com/embed/v2/${report.videoId}`;
 
- 
+
   React.useEffect(() => {
     window.addEventListener('resize', handleResize);
 
@@ -190,146 +195,171 @@ function App() {
 
   }, []);
 
-  let scaleFactor = (width/330) < 1.8 ? (width/330) : 1.8;
+  let scaleFactor = (width / 330) < 1.8 ? (width / 330) : 1.8;
   let heightFactor = 1.2;
 
   let panelHeight = document.getElementById("tiktok-embed") ? document.getElementById("tiktok-embed").getBoundingClientRect().height : "100%";
 
 
-  
+
   return (
-    <div style={{  background: "linear-gradient(210deg, #667eea, #764ba2, #6B8DD6)",
-    animation: "gradient 15s ease infinite"}}>
-      <div className="container">
-    <ThemeProvider theme={theme}>
-
-    <FullPage style={{  
-   background: index == 0 ? "white" :
-            report.reportsByCharacter[selectedReport].name == "Critical" ? 
-            
-            "linear-gradient(180deg, #960000, #ff5050, #e35353)" : 
-            
-            
-            report.reportsByCharacter[selectedReport].name == "Professional" ? 
-            
-            "linear-gradient(135deg, #cd4e00, #f69421, #fc8800)" : 
-            
-            
-            "linear-gradient(135deg, #008547, #19b066, #069c5d)"}}>
-       
-
-    <AppBar className="appBar" position="static" sx={{  background: "linear-gradient(135deg, #667eea, #764ba2, #6B8DD6)"
-          }}      elevation={0} variant="outlined">
-      <Toolbar>
-        <img height={40} src={`professional.png`}></img>
-        
-        <Typography variant="h5" style={{letterSpacing:.5}}>
-          {botName.toUpperCase()}
-        </Typography>
-        <Box sx={{ flexGrow: 1 }} />
-        {/* <Typography variant="h6" >
-          {report.creator.username}
-        </Typography> */}
-        AUDIENCE FEEDBACK AI DEMO
-      </Toolbar>
-    </AppBar>
-
-
-  
-  
-    <SwipeableViews index={index} onChangeIndex={handleChangeIndex}>
-
-  
     <div style={{
-      margin:"0 auto",
-  width:width,
-  height:"95vh",
-  // height: 722*heightFactor,
-  overflowX: "hidden",
-}}>
-          <SwipeToggle index={index} handleChangeIndex={handleChangeIndex}/>
+      background: "linear-gradient(210deg, #667eea, #764ba2, #6B8DD6)",
+      animation: "gradient 15s ease infinite"
+    }}>
+      <div className="container">
+        <ThemeProvider theme={theme}>
 
-      <iframe
-          id="tiktok-embed"
-            title="TikTok Video"
-            src={embedUrl}
-            frameBorder="0"
-            allowFullScreen
-            width="100%"
-        height={722 * heightFactor}
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            //remove scroll bar   
-            style={{transform: `scale(${scaleFactor})`, transformOrigin:"top", overflowY:"scroll", overflowX:"hidden"}}
-          ></iframe>
-  </div> 
-    
-        <div style={{ margin: "0 auto", width: "100%", height:"95vh",
-  overflowX: "hidden"
+          <FullPage 
+          // style={{
+          //   background: index == 0 ? "white" :
+          //     report.reportsByCharacter[selectedReport].name == "Critical" ?
 
-  
-  
-  }}>
-
-<SwipeToggle index={index} handleChangeIndex={handleChangeIndex}/>
-
-          <CharacterPicker selectedReport={selectedReport} setSelectedReport={setSelectedReport} characters={characters}/>
+          //       "linear-gradient(180deg, #960000, #ff5050, #e35353)" :
 
 
-          <Card elevation={0} sx={{ p:2, m:1, background:"transparent"}}>
+          //       report.reportsByCharacter[selectedReport].name == "Professional" ?
 
-            <Box sx={{ display: "flex", justifyContent: "flex-start", alignItems: "top", width: "100%" }}>
+          //         "linear-gradient(135deg, #cd4e00, #f69421, #fc8800)" :
 
-              {charactersSize("3em")[report.reportsByCharacter[selectedReport].name]}
-             
-              <Box sx={{borderRadius: 2, pl:2}}>
-                <Typography variant="h5" style={{lineHeight: 1.3, fontStyle: "italic" }}>
 
-                  {addLineBreaksToSentenceEnds(report.reportsByCharacter[selectedReport].summary)}
+          //         "linear-gradient(135deg, #008547, #19b066, #069c5d)"
+          // }}
+          >
+
+
+            <AppBar className="appBar" position="static" sx={{
+             background:"transparent"
+            }} elevation={0} variant="outlined">
+              <Toolbar>
+                <Typography variant="h4" style={{letterSpacing: .5 }}>
+               
+                  {botName.toUpperCase()}
+
+                  <span style={{ marginLeft: 15 }}>
+                    {Object.keys(characterEmojis).map((emoji, index) =>
+
+                      <span style={{ marginLeft: -10, zIndex: 100 / index }}>{characterEmojis[emoji]}</span>
+                    )}
+                  </span>
 
 
                 </Typography>
-              </Box>
+                <Box sx={{ flexGrow: 1 }} />
+                {/* <Typography variant="h6" >
+          {report.creator.username}
+        </Typography> */}
+        <Typography variant="h6" >
+                AUDIENCE FEEDBACK AI DEMO
+        </Typography>
+              </Toolbar>
+            </AppBar>
 
-            </Box>
-
-          </Card>
 
 
 
-            <Card elevation={0} sx={{p:1, pb:4}}>
-            <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", m:2 }}>
+            <SwipeableViews index={index} onChangeIndex={handleChangeIndex}>
 
-<Typography variant="h6" align="center" style={{fontStyle: "italic" }}>Top comments that {report.reportsByCharacter[selectedReport].highlightedReason}...</Typography>
 
-</Box>
-          <Box sx={{ display: "flex", flexDirection:"column", justifyContent: "center", width:"100%"}} >
+              <div style={{
+                margin: "0 auto",
+                width: width,
+                height: "95vh",
+                // height: 722*heightFactor,
+                overflowX: "hidden",
+              }}>
+                <SwipeToggle index={index} handleChangeIndex={handleChangeIndex} />
 
-          {report.reportsByCharacter[selectedReport].highlightedComments.map((comment, index) =>
+                <iframe
+                  id="tiktok-embed"
+                  title="TikTok Video"
+                  src={embedUrl}
+                  frameBorder="0"
+                  allowFullScreen
+                  width="100%"
+                  height={722 * heightFactor}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  //remove scroll bar   
+                  style={{ transform: `scale(${scaleFactor})`, transformOrigin: "top", overflowY: "scroll", overflowX: "hidden" }}
+                ></iframe>
+              </div>
 
-            <Box>
-              <TikTokComment
-                username={comment.uniqueId}
-                comment={comment}
-                likes={comment.diggCount}
-                cid={comment.cid}
-                characterAvatar={characters[report.reportsByCharacter[selectedReport].name]}
-              />
-             
-          
+              <div style={{
+                margin: "0 auto", width: "100%", height: "95vh",
+                overflowX: "hidden"
 
-            </Box>
-          )}
 
-</Box>
-</Card>
-            </div>
-        
 
-      </SwipeableViews>
+              }}>
 
-      </FullPage>
-    </ThemeProvider>
-    </div></div>
+                <SwipeToggle index={index} handleChangeIndex={handleChangeIndex} />
+
+                <CharacterPicker selectedReport={selectedReport} setSelectedReport={setSelectedReport} characters={characterEmojis} />
+
+
+                <Card elevation={0} sx={{ p: 2, m: 1, background: "transparent" }}>
+
+                  <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "top", width: "100%" }}>
+
+                    {/* {charactersSize("3em")[report.reportsByCharacter[selectedReport].name]} */}
+
+                    <Typography variant="h6" align="left" ><b>{botName.toUpperCase()}</b>&nbsp;{characterEmojis[report.reportsByCharacter[selectedReport].name]} </Typography>
+
+                    <Card elevation={0} sx={{ borderRadius: 2, background:"#eee", p:2}}>
+                      <Typography variant="h5" style={{ lineHeight: 1.3, fontStyle: "italic" }}>
+
+                        <MainSummary text={report.reportsByCharacter[selectedReport].summary} />
+
+
+                      </Typography>
+                    </Card>
+
+                  </Box>
+
+                </Card>
+
+
+
+                <Card variant="outlined" sx={{ p: 1, pb: 4 }}>
+                  <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", m: 2 }}>
+
+                    <Typography variant="h6" align="center" style={{ fontStyle: "italic" }}>{`Top comments that ${report.reportsByCharacter[selectedReport].highlightedReason}... `}
+                    
+                    <span style={{fontStyle:"normal", fontWeight:700, letterSpacing:"-1px"}}>({report.reportsByCharacter[selectedReport].highlightedComments.length})</span>
+                    
+                    </Typography>
+
+                  </Box>
+                  <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", width: "100%" }} >
+
+                    {report.reportsByCharacter[selectedReport].highlightedComments.map((comment, index) =>
+
+                      <Box>
+                        <TikTokComment
+                          username={comment.uniqueId}
+                          comment={comment}
+                          likes={comment.diggCount}
+                          cid={comment.cid}
+                          character={report.reportsByCharacter[selectedReport].name}
+                          characterEmojis={characterEmojis}
+                          botName={botName}
+                        />
+
+
+
+                      </Box>
+                    )}
+
+                  </Box>
+                </Card>
+              </div>
+
+
+            </SwipeableViews>
+
+          </FullPage>
+        </ThemeProvider>
+      </div></div>
   );
 }
 
@@ -348,48 +378,50 @@ const CharacterPicker = (props) => {
   };
 
   const valueLabelFormat = (index) => characterOptions[index].label;
-  
 
   return (
-    <div style={{ width: '80%', margin:"0 auto", marginTop:20}}>      
+    <div style={{ width: '80%', margin: "0 auto", marginTop: 20, cursor:"pointer" }}>
 
       <Grid container spacing={2} alignItems="center">
-      {characterOptions.map((character, index) => (
-        <Grid item xs={4}>
-           
-          <Typography onClick={() => setSelectedReport(index)} color="white" align="center" variant={Object.keys(characters)[selectedReport] == character.label ? "h6" : "subtitle1"}
-          style={{fontWeight: Object.keys(characters)[selectedReport] == character.label ? 700 : null}}
-          
-          >
-        
-          {character.label}
-       
-          </Typography>
-     
-          </Grid>
-      ))}
-        </Grid>
+        {characterOptions.map((character, index) => (
+          <Grid item xs={4}>
 
-      <div style={{width:"70%", margin:"0 auto"}}>
-      <CustomSlider
-        value={selectedReport}
-        onChange={handleCharacterChange}
-        step={1}
-        marks
-        min={0}
-        max={2}
-        track={false}
-        valueLabelFormat={valueLabelFormat}
-        sx={{
-          '& .MuiSlider-thumb': {
-            backgroundColor: '#ffffff', // Set thumb color to transparent
-            boxShadow: 'none', // Remove thumb shadow
-          },
-          '& .MuiSlider-track': {
-            backgroundColor: '#ffffff', // Set track color to transparent
-          },
-        }}
-      />
+            <Typography align="center" onClick={() => setSelectedReport(index)} variant={Object.keys(characters)[selectedReport] == character.label ? "h6" : "subtitle1"}
+              style={{ fontWeight: Object.keys(characters)[selectedReport] == character.label ? 700 : null }}
+
+            >
+
+            <div style={{fontSize: "1.8em"}}>{characters[character.label]}</div> 
+            
+
+              {character.label}
+
+            </Typography>
+
+          </Grid>
+        ))}
+      </Grid>
+
+      <div style={{ width: "70%", margin: "0 auto" }}>
+        <CustomSlider
+          value={selectedReport}
+          onChange={handleCharacterChange}
+          step={1}
+          marks
+          min={0}
+          max={2}
+          track={false}
+          valueLabelFormat={valueLabelFormat}
+          sx={{
+            '& .MuiSlider-thumb': {
+              backgroundColor: '#ffffff', // Set thumb color to transparent
+              boxShadow: 'none', // Remove thumb shadow
+            },
+            '& .MuiSlider-track': {
+              backgroundColor: '#ffffff', // Set track color to transparent
+            },
+          }}
+        />
       </div>
     </div>
   );
@@ -399,59 +431,71 @@ const SwipeToggle = (props) => {
   const { index, handleChangeIndex } = props;
 
   return (
-    <Box sx={{ position:"relative", display: "flex", justifyContent: "center", alignItems: "center", width: "100%", mt:1, mb:1}}>
+    <Box sx={{ position: "relative", display: "flex", justifyContent: "center", alignItems: "center", width: "100%", mt: 1, mb: 1 }}>
       {index == 0 ?
-      <Box sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center", width: "100%" }}>
-    <ButtonBase onClick={() => handleChangeIndex(index + 1)} sx={{ml:1, mr:1}}>
-        
+        <Box sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center", width: "100%" }}>
+          <ButtonBase onClick={() => handleChangeIndex(index + 1)} sx={{ ml: 1, mr: 1 }}>
 
-        <img height={30} style={{margin:5}} src="professional.png"/>
+            <Typography variant="h6"><span style={{ fontWeight: 700 }}>{botName.toUpperCase()}</span> read your comments...</Typography>
 
-        <Typography variant="h6" style={{ fontStyle: "italic", fontWeight:700 }}>{botName} read your comments...</Typography>
-
-      <IconButton onClick={() => handleChangeIndex(index + 1)}>
-        <ArrowForwardIos/>
-      </IconButton>
-      </ButtonBase>
-      </Box>
+            <IconButton onClick={() => handleChangeIndex(index + 1)}>
+              <ArrowForwardIos />
+            </IconButton>
+          </ButtonBase>
+        </Box>
 
 
-  :  
-  <Box sx={{ display: "flex", justifyContent: "flex-start", alignItems: "center", width: "100%" }}>
-    <ButtonBase onClick={() => handleChangeIndex(index - 1)} sx={{ml:1, mr:1}}>
-  <IconButton onClick={() => handleChangeIndex(index - 1)}>
-        <ArrowBackIos />
-      </IconButton>
-  <Typography variant="h6" style={{ fontStyle: "italic", fontWeight:700 }}>Back to TikTok</Typography>
-  </ButtonBase>
+        :
+        <Box sx={{ display: "flex", justifyContent: "flex-start", alignItems: "center", width: "100%" }}>
+          <ButtonBase onClick={() => handleChangeIndex(index - 1)} sx={{ ml: 1, mr: 1 }}>
+            <IconButton onClick={() => handleChangeIndex(index - 1)}>
+              <ArrowBackIos />
+            </IconButton>
+            <Typography variant="h6">Back to TikTok</Typography>
+          </ButtonBase>
 
-  </Box>
-}
+        </Box>
+      }
 
     </Box>
-    
-    
+
+
   );
 };
 
 
-function addLineBreaksToSentenceEnds(text) {
+function MainSummary(props) {
   // Use a regular expression to find sentence-ending punctuation and add a line break
-  const stringWithLineBreaks = text.replace(/([.!?])\s/g, "$1\n\n");
+  const stringWithLineBreaks = props.text.replace(/([.!?])\s/g, "$1\n\n");
 
+  const [more, setMore] = React.useState(false);
 
-  const processedText = stringWithLineBreaks.split('\n').map((line, index) => (
+  React.useEffect(() => {
+    setMore(false);
+  }, [props.text])
+
+  return(
+    <>
+    {stringWithLineBreaks.split('\n').map((line, index) => (
     <React.Fragment key={index}>
-      <span style={{fontSize:index==0 ? "1.4rem" : null}}>{line}</span>
-      {/* {line} */}
+      <span style={{ display: index == 0 || more ? "inline" : "none",
+        
+        // fontSize: index == 0 ? "1.4rem" : null 
+        
+        }}>{line}
+       {index == 0 && !more ? <span onClick={() => setMore(!more)}>.. <span style={{fontWeight:700, color:"#666"}}>more</span></span> : " "}
       <br />
+      </span>
     </React.Fragment>
-  ));
+  ))}
+  
+  {more ? <span onClick={() => setMore(!more)}><br/><span style={{fontWeight:700, color:"#666"}}>less</span></span> : null}
 
-
-  return processedText;
-}
-
+  
+  </>
+  
+  )}
+  
 
 
 export default App;

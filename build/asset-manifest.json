@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/summy-ai/static/css/main.f063006c.css",
-    "main.js": "/summy-ai/static/js/main.8ec910af.js",
+    "main.css": "/summy-ai/static/css/main.64be52fa.css",
+    "main.js": "/summy-ai/static/js/main.5f3ea17e.js",
     "static/js/787.44b4c305.chunk.js": "/summy-ai/static/js/787.44b4c305.chunk.js",
     "static/media/logo.svg": "/summy-ai/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/summy-ai/index.html",
-    "main.f063006c.css.map": "/summy-ai/static/css/main.f063006c.css.map",
-    "main.8ec910af.js.map": "/summy-ai/static/js/main.8ec910af.js.map",
+    "main.64be52fa.css.map": "/summy-ai/static/css/main.64be52fa.css.map",
+    "main.5f3ea17e.js.map": "/summy-ai/static/js/main.5f3ea17e.js.map",
     "787.44b4c305.chunk.js.map": "/summy-ai/static/js/787.44b4c305.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f063006c.css",
-    "static/js/main.8ec910af.js"
+    "static/css/main.64be52fa.css",
+    "static/js/main.5f3ea17e.js"
   ]
 }

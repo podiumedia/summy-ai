@@ -5,7 +5,7 @@ import CardHeader from '@mui/material/CardHeader';
 import Avatar from '@mui/material/Avatar';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { Box, Button } from '@mui/material';
+import { Box, Button, ButtonBase } from '@mui/material';
 import { Comment, FavoriteBorder, Reply } from '@mui/icons-material';
 
 const TikTokCommentCard = styled(Card)(({ theme }) => ({
@@ -25,18 +25,18 @@ const CircularAvatar = styled(Avatar)({
   
 
 const TikTokComment = (props) => {
-  const { username, comment, timestamp, avatar, likes, report, characterAvatar } = props;
+  const { username, comment, timestamp, avatar, likes, report, character, characterEmojis, botName } = props;
 
   return (
       <TikTokCommentCard elevation={0}>
 
         
-              <Box sx={{ display: 'flex', flexDirection: "row", alignItems: 'top', mb: 1, p:2 }}>
+              <Box sx={{ display: 'flex', flexDirection: "row", alignItems: 'top', p:2 }}>
 
                   <CircularAvatar><Comment/></CircularAvatar>
 
         
-                  <Box sx={{ display: 'flex', flexDirection: "column", justifyContent:"flex-start", alignItems: 'center', mb: 1}}>
+                  <Box sx={{ display: 'flex', flexDirection: "column", justifyContent:"flex-start", alignItems: 'center'}}>
 
                   <Box sx={{width:"100%" }}>
                           <Typography variant="h6">
@@ -52,13 +52,20 @@ const TikTokComment = (props) => {
                                   {comment.text}
                               </Typography>
 
-                              <Box sx={{ display: "flex", flexDirection:"row", alignItems: "top", mt:3, mb:2}}>
+                              <Box sx={{ display: "flex", flexDirection:"column", alignItems: "top", mt:2, ml:2}}>
 
-                                        <Box sx={{mr:1}}>
-                                    {characterAvatar}
+                                        <Box>
+                                          <Typography variant="h6">
+                                    <b>{botName.toUpperCase()}</b>&nbsp;{characterEmojis[character]}
+                                    </Typography>
                                     </Box>
-                                    <Typography variant="body1" component="p">{addLineBreaksToSentenceEnds(comment.commentSummary)}</Typography>
+
+                                    <Card elevation={0} sx={{background:"#eee", borderRadius:3, p:1}}>
+                                    <Typography variant="body1" component="p">
+                                      
+                                      <CommentSummary text={comment.commentSummary}/></Typography>
                             
+                                    </Card>
                                 
                                     
 
@@ -122,5 +129,34 @@ function addLineBreaksToSentenceEnds(text) {
     return processedText;
   }
   
+
+  function CommentSummary(props) {
+    // Use a regular expression to find sentence-ending punctuation and add a line break
+    const stringWithLineBreaks = props.text.replace(/([.!?])\s/g, "$1\n\n");
+  
+    const [more, setMore] = React.useState(false);
+  
+    React.useEffect(() => {
+      setMore(false);
+    }, [props.text])
+  
+    return(
+      <>
+      {stringWithLineBreaks.split('\n').map((line, index) => (
+      <React.Fragment key={index}>
+        <span style={{ display: index == 0 || more ? "inline" : "none"}}>{line}
+        {index == 0 && !more ? <span onClick={() => setMore(!more)}>.. <span style={{fontWeight:700, color:"#666"}}>more</span></span> : " "}
+        </span>
+      </React.Fragment>
+
+
+ 
+      ))}
+
+    {more ? <span onClick={() => setMore(!more)}><span style={{fontWeight:700, color:"#666"}}>less</span></span> : null}
+
+      </>
+    
+    )}
 
 export default TikTokComment;
