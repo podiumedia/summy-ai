@@ -408,7 +408,7 @@ const CharacterPicker = (props) => {
   const valueLabelFormat = (index) => characterOptions[index].label;
 
   return (
-    <div style={{ width: '80%', margin: "0 auto", marginTop: 20, cursor:"pointer" }}>
+    <div style={{ width: '90%', margin: "0 auto", marginTop: 20, cursor:"pointer" }}>
 
       <Grid container spacing={2} alignItems="center">
         {characterOptions.map((character, index) => (
