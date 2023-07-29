@@ -6,7 +6,7 @@ import Avatar from '@mui/material/Avatar';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Box, Button, ButtonBase } from '@mui/material';
-import { Comment, FavoriteBorder, Reply } from '@mui/icons-material';
+import { Comment, FavoriteBorder, Reply, Send, SendToMobile } from '@mui/icons-material';
 
 const TikTokCommentCard = styled(Card)(({ theme }) => ({
   width:"100%",
@@ -55,8 +55,8 @@ const TikTokComment = (props) => {
                               <Box sx={{ display: "flex", flexDirection:"column", alignItems: "top", mt:2, ml:2}}>
 
                                         <Box>
-                                          <Typography variant="h6"  style={{letterSpacing:"-2px"}}>
-                                    <b>{botName.toUpperCase()}</b>&nbsp;{characterEmojis[character]}
+                                          <Typography variant="h6"  sx={{letterSpacing:"-2px", pl:1}}>
+                                    <b>{botName.toUpperCase()}</b>&nbsp;&nbsp;{characterEmojis[character]}
                                     </Typography>
                                     </Box>
 
@@ -94,7 +94,7 @@ const TikTokComment = (props) => {
 
               <Box sx={{display:"flex", width:"100%"}}>
                     <Box sx={{ flexGrow: 1 }} />
-                    <Button endIcon={<Reply/>} onClick={() => window.open(comment.videoWebUrl, "_blank")}
+                    <Button endIcon={<SendToMobile/>} onClick={() => window.open(comment.videoWebUrl, "_blank")}
                     sx={{color:"#666", textTransform:"none"}}
                      size="small">Go To Comment</Button>
                 </Box>
@@ -133,6 +133,7 @@ function addLineBreaksToSentenceEnds(text) {
   function CommentSummary(props) {
     // Use a regular expression to find sentence-ending punctuation and add a line break
     const stringWithLineBreaks = props.text.replace(/([.!?])\s/g, "$1\n\n");
+    const length = stringWithLineBreaks.split('\n').length;
   
     const [more, setMore] = React.useState(false);
   
@@ -145,7 +146,7 @@ function addLineBreaksToSentenceEnds(text) {
       {stringWithLineBreaks.split('\n').map((line, index) => (
       <React.Fragment key={index}>
         <span style={{ display: index == 0 || more ? "inline" : "none"}}>{line}
-        {index == 0 && !more ? <span onClick={() => setMore(!more)}>.. <span style={{fontWeight:700, color:"#666"}}>more</span></span> : " "}
+        {index == 0 && !more && length > 1 ? <span onClick={() => setMore(!more)}>.. <span style={{fontWeight:700, color:"#666"}}>more</span></span> : " "}
         </span>
       </React.Fragment>
 

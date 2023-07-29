@@ -15,39 +15,26 @@ import { responsiveProperty } from '@mui/material/styles/cssUtils';
 import SwipeableViews from 'react-swipeable-views';
 import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
+import '@fontsource/poppins'; // Import the Poppins font
+import '@fontsource/open-sans'; // Import the Open Sans font
+
 
 const botName = "SUMMY";
 
 
-
-const StyledAvatar = styled(Avatar)`
-  width: 100px;
-  height: 100px;
-  margin: 0 auto;
-  margin-bottom: 20px;
-`;
-
-const charactersSize = (size) => {
-  return {
-    "Supportive": <Avatar sx={{ fontSize: size }} alt="Supportive" >💟</Avatar>,
-    "Professional": <Avatar sx={{ height: size, width: size }} src="professional.png" alt="Professional" />,
-    "Critical": <Avatar sx={{ height: size, width: size }} src="critical.png" alt="Critical" />
-  }
-}
-
-
 const characterEmojis = {
   "Supportive": "🤗",
-  "Professional": "👩‍💼",
+  "Professional": "🤓",
   "Critical": "😡"
 };
-
 
 
 const theme = createTheme({
   typography: {
     fontFamily: [
       'Poppins',
+      "Open Sans",
+      "Roboto",
       'sans-serif',
     ].join(','),
     caption: {
@@ -63,11 +50,10 @@ const theme = createTheme({
     },
     h5: {
       fontSize: '1rem',
-      fontWeight: 700,
     },
     h6: {
-      fontSize: '1rem',
-      color:"#222"
+      fontSize: '1.1rem',
+      color:"#222",
     },
     body2: {
       fontSize: '0.875rem',
@@ -78,6 +64,8 @@ const theme = createTheme({
       fontSize: '.95rem',
       fontFamily: [
         'Open Sans',
+        'Poppins',
+        "Roboto",
         'sans-serif',
       ].join(','),
       color:"#222"
@@ -86,6 +74,8 @@ const theme = createTheme({
       fontSize: '1rem',
       fontFamily: [
         'Open Sans',
+        'Poppins',
+        "Roboto",
         'sans-serif',
       ].join(','),
     }
@@ -175,6 +165,30 @@ function App() {
     setHeight(window.innerHeight);
   };
 
+  const [touchStart, setTouchStart] = React.useState(null)
+const [touchEnd, setTouchEnd] = React.useState(null)
+
+// the required distance between touchStart and touchEnd to be detected as a swipe
+const minSwipeDistance = 50 
+
+const onTouchStart = (e) => {
+  console.log('touchstart', e.targetTouches[0].clientX);
+  setTouchEnd(null); // otherwise the swipe is fired even with usual touch events
+  setTouchStart(e.targetTouches[0].clientX);
+}
+
+const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX)
+
+const onTouchEnd = () => {
+  if (!touchStart || !touchEnd) return
+  const distance = touchStart - touchEnd
+  const isLeftSwipe = distance > minSwipeDistance
+  const isRightSwipe = distance < -minSwipeDistance
+  if (isLeftSwipe || isRightSwipe) console.log('swipe', isLeftSwipe ? 'left' : 'right')
+  handleChangeIndex(isLeftSwipe ? 1 : 0);
+}
+
+
   const [index, setIndex] = React.useState(0);
 
   const handleChangeIndex = (index) => {
@@ -199,10 +213,6 @@ function App() {
   let scaleFactor = (width / 330) < 1.8 ? (width / 330) : 1.8;
   let heightFactor = 1.2;
 
-  let panelHeight = document.getElementById("tiktok-embed") ? document.getElementById("tiktok-embed").getBoundingClientRect().height : "100%";
-
-
-
   return (
     <div style={{
       background: "linear-gradient(210deg, #667eea, #764ba2, #6B8DD6)",
@@ -211,22 +221,7 @@ function App() {
       <div className="container">
         <ThemeProvider theme={theme}>
 
-          <FullPage 
-          // style={{
-          //   background: index == 0 ? "white" :
-          //     report.reportsByCharacter[selectedReport].name == "Critical" ?
-
-          //       "linear-gradient(180deg, #960000, #ff5050, #e35353)" :
-
-
-          //       report.reportsByCharacter[selectedReport].name == "Professional" ?
-
-          //         "linear-gradient(135deg, #cd4e00, #f69421, #fc8800)" :
-
-
-          //         "linear-gradient(135deg, #008547, #19b066, #069c5d)"
-          // }}
-          >
+          <FullPage>
 
 
             <AppBar className="appBar" position="static" sx={{
@@ -259,30 +254,40 @@ function App() {
 
 
 
+
             <SwipeableViews index={index} onChangeIndex={handleChangeIndex}>
 
 
-              <div style={{
+
+
+              <div 
+              style={{
                 margin: "0 auto",
                 width: width,
                 height: "95vh",
                 // height: 722*heightFactor,
                 overflowX: "hidden",
+                
               }}>
-                <SwipeToggle index={index} handleChangeIndex={handleChangeIndex} />
+
+<SwipeToggle index={index} handleChangeIndex={handleChangeIndex} />
+
 
                 <iframe
-                  id="tiktok-embed"
-                  title="TikTok Video"
+
+
                   src={embedUrl}
                   frameBorder="0"
                   allowFullScreen
                   width="100%"
                   height={722 * heightFactor}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   //remove scroll bar   
                   style={{ transform: `scale(${scaleFactor})`, transformOrigin: "top", overflowY: "scroll", overflowX: "hidden" }}
                 ></iframe>
+
+              <Box>
+              <SwipeToggle index={index} handleChangeIndex={handleChangeIndex} />
+              </Box>
               </div>
 
               <div style={{
@@ -293,7 +298,7 @@ function App() {
 
               }}>
 
-                <SwipeToggle index={index} handleChangeIndex={handleChangeIndex} />
+              <SwipeToggle index={index} handleChangeIndex={handleChangeIndex} />
 
                 <CharacterPicker selectedReport={selectedReport} setSelectedReport={setSelectedReport} characters={characterEmojis} />
 
@@ -302,12 +307,12 @@ function App() {
 
                   <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "top", width: "100%" }}>
 
-                    {/* {charactersSize("3em")[report.reportsByCharacter[selectedReport].name]} */}
+                    
 
-                    <Typography variant="h6" align="left" style={{letterSpacing:"-2px"}} ><b>{botName.toUpperCase()}</b>&nbsp;{characterEmojis[report.reportsByCharacter[selectedReport].name]} </Typography>
+                    <Typography variant="h6" align="left" sx={{letterSpacing:"-2px", pl:2}} ><b>{botName.toUpperCase()}</b>&nbsp;&nbsp;{characterEmojis[report.reportsByCharacter[selectedReport].name]} </Typography>
 
                     <Card elevation={0} sx={{ borderRadius: 2, background:"#eee", p:2}}>
-                      <Typography variant="h5" style={{ lineHeight: 1.3, fontStyle: "italic" }}>
+                      <Typography variant="h5">
 
                         <MainSummary text={report.reportsByCharacter[selectedReport].summary} />
 
@@ -320,15 +325,34 @@ function App() {
                 </Card>
 
 
+                <Card variant="outlined" sx={{pt:2}}>
+                 
+                 
+                 
+                  <Box sx={{ display: "flex", justifyContent: "flex-start", flexDirection:"column", alignItems: "center", width:"100%" }}>
+             
 
-                <Card variant="outlined" sx={{ p: 1, pb: 4 }}>
-                  <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", m: 2 }}>
+                  <Box>
 
-                    <Typography variant="h6" align="center" style={{ fontStyle: "italic" }}>{`Top comments that ${report.reportsByCharacter[selectedReport].highlightedReason}... `}
-                    
-                    <span style={{fontStyle:"normal", fontWeight:700, letterSpacing:"-1px"}}>({report.reportsByCharacter[selectedReport].highlightedComments.length})</span>
-                    
+
+                  <Typography variant="h6" align="left" sx={{letterSpacing:"-2px", ml:4}} ><b>{botName.toUpperCase()}</b>&nbsp;&nbsp;{characterEmojis[report.reportsByCharacter[selectedReport].name]} </Typography>
+               
+
+                <Card elevation={0} sx={{ borderRadius: 2, background:"#eee", p:1, mr:3, ml:3 }}>
+              
+                    <Typography ariant="body1" component="p" align="left" >{`Here are top comments that ${report.reportsByCharacter[selectedReport].highlightedReason}... `}
+                                        
                     </Typography>
+               
+                </Card>
+
+
+                </Box>
+
+                    <Box sx={{mt:1}}>
+                    <Typography variant="caption" align="center" >{`${report.reportsByCharacter[selectedReport].highlightedComments.length} Comment${report.reportsByCharacter[selectedReport].highlightedComments.length > 1 ? "s" : ""}`}</Typography>
+                    </Box>
+              
 
                   </Box>
                   <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", width: "100%" }} >
@@ -350,6 +374,9 @@ function App() {
 
                       </Box>
                     )}
+           
+                    <SwipeToggle index={index} handleChangeIndex={handleChangeIndex} />
+                    <br/>
 
                   </Box>
                 </Card>
@@ -496,6 +523,8 @@ function MainSummary(props) {
   </>
   
   )}
+  
+
   
 
 
