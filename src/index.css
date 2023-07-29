@@ -33,7 +33,7 @@ code {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #502081; /* Change to your desired color */
+  background-color: #eee; /* Change to your desired color */
   border-radius: 10px;
 }
 
