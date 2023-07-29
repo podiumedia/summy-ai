@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/summy-ai/static/css/main.085a26c3.css",
-    "main.js": "/summy-ai/static/js/main.d7db2409.js",
+    "main.js": "/summy-ai/static/js/main.077b5bb5.js",
     "static/js/787.44b4c305.chunk.js": "/summy-ai/static/js/787.44b4c305.chunk.js",
     "static/media/poppins-devanagari-400-normal.woff": "/summy-ai/static/media/poppins-devanagari-400-normal.0e11b62db931f85340d4.woff",
     "static/media/poppins-devanagari-400-normal.woff2": "/summy-ai/static/media/poppins-devanagari-400-normal.64d5f06ee726edd58ca3.woff2",
@@ -28,11 +28,11 @@
     "static/media/open-sans-greek-ext-400-normal.woff": "/summy-ai/static/media/open-sans-greek-ext-400-normal.da076625b5afad4ce426.woff",
     "index.html": "/summy-ai/index.html",
     "main.085a26c3.css.map": "/summy-ai/static/css/main.085a26c3.css.map",
-    "main.d7db2409.js.map": "/summy-ai/static/js/main.d7db2409.js.map",
+    "main.077b5bb5.js.map": "/summy-ai/static/js/main.077b5bb5.js.map",
     "787.44b4c305.chunk.js.map": "/summy-ai/static/js/787.44b4c305.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.085a26c3.css",
-    "static/js/main.d7db2409.js"
+    "static/js/main.077b5bb5.js"
   ]
 }
