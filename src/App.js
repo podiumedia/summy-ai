@@ -151,6 +151,7 @@ const FullPage = styled.div`
 height: 100vh;
 background-color: #fefefe;
 overflow: hidden; 
+position: static;
 `;
 
 const myToken = 'apify_api_RtAeagNa528JNr5nr99oQ4iGZGlbHH34vzGy';
