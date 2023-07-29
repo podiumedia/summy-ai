@@ -55,7 +55,7 @@ const TikTokComment = (props) => {
                               <Box sx={{ display: "flex", flexDirection:"column", alignItems: "top", mt:2, ml:2}}>
 
                                         <Box>
-                                          <Typography variant="h6">
+                                          <Typography variant="h6"  style={{letterSpacing:"-2px"}}>
                                     <b>{botName.toUpperCase()}</b>&nbsp;{characterEmojis[character]}
                                     </Typography>
                                     </Box>

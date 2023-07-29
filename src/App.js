@@ -16,7 +16,7 @@ import SwipeableViews from 'react-swipeable-views';
 import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
-const botName = "Summy";
+const botName = "SUMMY";
 
 
 
@@ -56,9 +56,9 @@ const theme = createTheme({
       lineHeight: 1.66,
     },
     h4: {
-      fontSize: '1.5rem',
+      fontSize: '1.3rem',
       fontWeight: 700,
-      letterSpacing: 1,
+      letterSpacing: "-2px",
       color:"#222"
     },
     h5: {
@@ -75,11 +75,12 @@ const theme = createTheme({
       lineHeight: 1.66,
     },
     body1: {
-      fontSize: '1rem',
+      fontSize: '.95rem',
       fontFamily: [
         'Open Sans',
         'sans-serif',
       ].join(','),
+      color:"#222"
     },
     subtitle1: {
       fontSize: '1rem',
@@ -232,14 +233,14 @@ function App() {
              background:"transparent"
             }} elevation={0} variant="outlined">
               <Toolbar>
-                <Typography variant="h4" style={{letterSpacing: .5 }}>
+                <Typography variant="h4">
                
-                  {botName.toUpperCase()}
+                  {botName}
 
                   <span style={{ marginLeft: 15 }}>
                     {Object.keys(characterEmojis).map((emoji, index) =>
 
-                      <span style={{ marginLeft: -10, zIndex: 100 / index }}>{characterEmojis[emoji]}</span>
+                      <span style={{ marginLeft: -8, zIndex: 100 / index }}>{characterEmojis[emoji]}</span>
                     )}
                   </span>
 
@@ -249,8 +250,8 @@ function App() {
                 {/* <Typography variant="h6" >
           {report.creator.username}
         </Typography> */}
-        <Typography variant="h6" >
-                AUDIENCE FEEDBACK AI DEMO
+        <Typography variant="body1" >
+                CREATOR FEEDBACK AI DEMO
         </Typography>
               </Toolbar>
             </AppBar>
@@ -303,7 +304,7 @@ function App() {
 
                     {/* {charactersSize("3em")[report.reportsByCharacter[selectedReport].name]} */}
 
-                    <Typography variant="h6" align="left" ><b>{botName.toUpperCase()}</b>&nbsp;{characterEmojis[report.reportsByCharacter[selectedReport].name]} </Typography>
+                    <Typography variant="h6" align="left" style={{letterSpacing:"-2px"}} ><b>{botName.toUpperCase()}</b>&nbsp;{characterEmojis[report.reportsByCharacter[selectedReport].name]} </Typography>
 
                     <Card elevation={0} sx={{ borderRadius: 2, background:"#eee", p:2}}>
                       <Typography variant="h5" style={{ lineHeight: 1.3, fontStyle: "italic" }}>
@@ -436,7 +437,7 @@ const SwipeToggle = (props) => {
         <Box sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center", width: "100%" }}>
           <ButtonBase onClick={() => handleChangeIndex(index + 1)} sx={{ ml: 1, mr: 1 }}>
 
-            <Typography variant="h6"><span style={{ fontWeight: 700 }}>{botName.toUpperCase()}</span> read your comments...</Typography>
+            <Typography variant="h6"><span style={{ fontWeight: 700,letterSpacing:"-2px" }}>{botName.toUpperCase()}</span> read these comments...</Typography>
 
             <IconButton onClick={() => handleChangeIndex(index + 1)}>
               <ArrowForwardIos />
