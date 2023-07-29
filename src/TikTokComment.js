@@ -92,7 +92,7 @@ const TikTokComment = (props) => {
 
              
 
-              <Box sx={{display:"flex", width:"100%"}}>
+              <Box sx={{display:"flex", width:"100%", mt:1}}>
                     <Box sx={{ flexGrow: 1 }} />
                     <Button endIcon={<SendToMobile/>} onClick={() => window.open(comment.videoWebUrl, "_blank")}
                     sx={{color:"#666", textTransform:"none"}}
