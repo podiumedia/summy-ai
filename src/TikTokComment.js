@@ -36,7 +36,7 @@ const TikTokComment = (props) => {
                   <CircularAvatar><Comment/></CircularAvatar>
 
         
-                  <Box sx={{ display: 'flex', flexDirection: "column", justifyContent:"flex-start", alignItems: 'center'}}>
+                  <Box sx={{ display: 'flex', flexDirection: "column", justifyContent:"flex-start"}}>
 
                   <Box sx={{width:"100%" }}>
                           <Typography variant="h6">
@@ -94,7 +94,7 @@ const TikTokComment = (props) => {
 
               <Box sx={{display:"flex", width:"100%", mt:1}}>
                     <Box sx={{ flexGrow: 1 }} />
-                    <Button endIcon={<SendToMobile/>} onClick={() => window.open(comment.videoWebUrl, "_blank")}
+                    <Button endIcon={<SendToMobile/>} onClick={() => window.open(comment.videoWebUrl + "#:~:text=" + comment.text, "_blank")}
                     sx={{color:"#666", textTransform:"none"}}
                      size="small">Go To Comment</Button>
                 </Box>
@@ -146,7 +146,7 @@ function addLineBreaksToSentenceEnds(text) {
       {stringWithLineBreaks.split('\n').map((line, index) => (
       <React.Fragment key={index}>
         <span style={{ display: index == 0 || more ? "inline" : "none"}}>{line}
-        {index == 0 && !more && length > 1 ? <span onClick={() => setMore(!more)}>.. <span style={{fontWeight:700, color:"#666"}}>more</span></span> : " "}
+        {index == 0 && !more && length > 1 ? <span onClick={() => setMore(!more)}>.. <span style={{fontWeight:700, color:"#666",  cursor:"pointer"}}>more</span></span> : " "}
         </span>
       </React.Fragment>
 
@@ -154,7 +154,7 @@ function addLineBreaksToSentenceEnds(text) {
  
       ))}
 
-    {more ? <span onClick={() => setMore(!more)}><span style={{fontWeight:700, color:"#666"}}>less</span></span> : null}
+    {more ? <span onClick={() => setMore(!more)}><span style={{fontWeight:700, color:"#666",  cursor:"pointer"}}>less</span></span> : null}
 
       </>
     

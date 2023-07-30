@@ -16,7 +16,10 @@ import SwipeableViews from 'react-swipeable-views';
 import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import '@fontsource/poppins'; // Import the Poppins font
+import '@fontsource/poppins/700.css'; // Import the Poppins font
+
 import '@fontsource/open-sans'; // Import the Open Sans font
+import '@fontsource/open-sans/700.css'; // Import the Open Sans font
 
 
 const botName = "SUMMY";
@@ -39,14 +42,13 @@ const theme = createTheme({
     ].join(','),
     caption: {
       fontSize: '0.7rem',
-      fontWeight: 400,
       lineHeight: 1.66,
     },
     h4: {
       fontSize: '1.3rem',
       fontWeight: 700,
       letterSpacing: "-2px",
-      color:"#222"
+      color:"#222",
     },
     h5: {
       fontSize: '1rem',
@@ -54,10 +56,10 @@ const theme = createTheme({
     h6: {
       fontSize: '1.1rem',
       color:"#222",
+      fontWeight: 700,
     },
     body2: {
       fontSize: '0.875rem',
-      fontWeight: 500,
       lineHeight: 1.66,
     },
     body1: {
@@ -123,29 +125,6 @@ const CustomSlider = muiStyled(Slider)(({ theme }) => ({
     background: 'linear-gradient(to right, #008547, orange, #960000)',
   },
 }));
-
-
-const GlassmorphicContainer = styled.div`
-  backdrop-filter: blur(10px);
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #667eea, #764ba2, #6B8DD6);
-  background-size: 600% 600%;
-  animation: gradientAnimation 15s ease infinite;
-
-  @keyframes gradientAnimation {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-`;
 
 const FullPage = styled.div`
 height: 100vh;
@@ -234,7 +213,7 @@ const onTouchEnd = () => {
                   {botName}
 
                   <span style={{ marginLeft: 15 }}>
-                    {Object.keys(characterEmojis).map((emoji, index) =>
+                    {Object.keys(characterEmojis).reverse().map((emoji, index) =>
 
                       <span style={{ marginLeft: -8, zIndex: 100 / index }}>{characterEmojis[emoji]}</span>
                     )}
@@ -326,26 +305,29 @@ const onTouchEnd = () => {
                 </Card>
 
 
-                <Card variant="outlined" sx={{pt:2}}>
+                <Card variant="outlined" sx={{pt:2, border:"2px solid #ddd", borderRadius:2}}>
                  
                  
                  
                   <Box sx={{ display: "flex", justifyContent: "flex-start", flexDirection:"column", alignItems: "center", width:"100%" }}>
              
 
-                  <Box>
+                  <Box sx={{justifyContent:"flex-start", display:"flex", width:"100%"}}>
 
+                  <Box>
 
                   <Typography variant="h6" align="left" sx={{letterSpacing:"-2px", ml:4}} ><b>{botName.toUpperCase()}</b>&nbsp;&nbsp;{characterEmojis[report.reportsByCharacter[selectedReport].name]} </Typography>
                
 
                 <Card elevation={0} sx={{ borderRadius: 2, background:"#eee", p:1, mr:3, ml:3 }}>
               
-                    <Typography ariant="body1" component="p" align="left" >{`Here are top comments that ${report.reportsByCharacter[selectedReport].highlightedReason}... `}
+                    <Typography ariant="body1" component="p" align="left" >{`Here are the top comments that ${report.reportsByCharacter[selectedReport].highlightedReason}... `}
                                         
                     </Typography>
                
                 </Card>
+
+                </Box>
 
 
                 </Box>
@@ -480,7 +462,7 @@ const SwipeToggle = (props) => {
             <IconButton onClick={() => handleChangeIndex(index - 1)}>
               <ArrowBackIos />
             </IconButton>
-            <Typography variant="h6">Back to TikTok</Typography>
+            <Typography variant="h6">Back to Video</Typography>
           </ButtonBase>
 
         </Box>
@@ -512,13 +494,13 @@ function MainSummary(props) {
         // fontSize: index == 0 ? "1.4rem" : null 
         
         }}>{line}
-       {index == 0 && !more ? <span onClick={() => setMore(!more)}>.. <span style={{fontWeight:700, color:"#666"}}>more</span></span> : " "}
+       {index == 0 && !more ? <span onClick={() => setMore(!more)}>.. <span style={{fontWeight:700, color:"#666", cursor:"pointer"}}>more</span></span> : " "}
       <br />
       </span>
     </React.Fragment>
   ))}
   
-  {more ? <span onClick={() => setMore(!more)}><br/><span style={{fontWeight:700, color:"#666"}}>less</span></span> : null}
+  {more ? <span onClick={() => setMore(!more)}><br/><span style={{fontWeight:700, color:"#666",  cursor:"pointer"}}>less</span></span> : null}
 
   
   </>
