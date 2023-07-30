@@ -212,10 +212,11 @@ const onTouchEnd = () => {
                
                   {botName}
 
-                  <span style={{ marginLeft: 15 }}>
-                    {Object.keys(characterEmojis).reverse().map((emoji, index) =>
+                  <span style={{marginLeft:5,position:"relative", fontSize:"1.5rem"}}>
+                    {Object.keys(characterEmojis).map((emoji, index) =>
 
-                      <span style={{ marginLeft: -8, zIndex: 100 / index }}>{characterEmojis[emoji]}</span>
+                      <span style={{ left: index*12, position: "absolute",
+                        display: 'inline-block', zIndex:100/(index+1)}}>{characterEmojis[emoji]}</span>
                     )}
                   </span>
 
@@ -254,7 +255,6 @@ const onTouchEnd = () => {
 
 
                 <iframe
-
 
                   src={embedUrl}
                   frameBorder="0"
@@ -500,9 +500,13 @@ function MainSummary(props) {
     </React.Fragment>
   ))}
   
-  {more ? <span onClick={() => setMore(!more)}><br/><span style={{fontWeight:700, color:"#666",  cursor:"pointer"}}>less</span></span> : null}
-
+  {more ? 
   
+  <Box sx={{display:"flex", justifyContent:"center", alignItems:"center", width:"100%"}}>
+    <Box sx={{flexGrow:1}}/>
+  <span onClick={() => setMore(!more)}><br/><span style={{fontWeight:700, color:"#666",  cursor:"pointer"}}>less</span></span> 
+  </Box> : null}
+ 
   </>
   
   )}
