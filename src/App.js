@@ -157,13 +157,13 @@ const onTouchStart = (e) => {
   setTouchStart(e.targetTouches[0].clientX);
 }
 
-const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX)
+const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
 
 const onTouchEnd = () => {
   if (!touchStart || !touchEnd) return
-  const distance = touchStart - touchEnd
-  const isLeftSwipe = distance > minSwipeDistance
-  const isRightSwipe = distance < -minSwipeDistance
+  const distance = touchStart - touchEnd;
+  const isLeftSwipe = distance > minSwipeDistance;
+  const isRightSwipe = distance < -minSwipeDistance;
   if (isLeftSwipe || isRightSwipe) console.log('swipe', isLeftSwipe ? 'left' : 'right')
   handleChangeIndex(isLeftSwipe ? 1 : 0);
 }
@@ -227,7 +227,7 @@ const onTouchEnd = () => {
           {report.creator.username}
         </Typography> */}
         <Typography variant="body1" >
-                CREATOR FEEDBACK AI DEMO
+               COMMENTS SUMMARY DEMO
         </Typography>
               </Toolbar>
             </AppBar>
