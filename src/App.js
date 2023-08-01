@@ -14,7 +14,7 @@ import { Avatar } from '@mui/material';
 import { responsiveProperty } from '@mui/material/styles/cssUtils';
 import SwipeableViews from 'react-swipeable-views';
 import { IconButton } from '@mui/material';
-import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
+import { ArrowBackIos, ArrowForwardIos, Preview } from '@mui/icons-material';
 import '@fontsource/poppins'; // Import the Poppins font
 import '@fontsource/poppins/700.css'; // Import the Poppins font
 
@@ -251,7 +251,11 @@ const onTouchEnd = () => {
                 
               }}>
 
-<SwipeToggle index={index} handleChangeIndex={handleChangeIndex} />
+              <div style={{position:"absolute", top:0, left:0, width:"100%", height:"fit-content", zIndex:10, cursor:"pointer",
+            }} onClick={() => handleChangeIndex(index == 0 ? 1 : 0)}>
+              <PreviewSummary text={report.reportsByCharacter[selectedReport].summary} index={index} handleChangeIndex={handleChangeIndex} botName={botName} report={report} selectedReport={selectedReport} characterEmojis={characterEmojis} />
+              </div>
+
 
 
                 <iframe
@@ -267,6 +271,8 @@ const onTouchEnd = () => {
 
               <Box>
               <SwipeToggle index={index} handleChangeIndex={handleChangeIndex} />
+
+         
               </Box>
               </div>
 
@@ -363,6 +369,7 @@ const onTouchEnd = () => {
 
                   </Box>
                 </Card>
+              
               </div>
 
 
@@ -444,17 +451,17 @@ const SwipeToggle = (props) => {
   return (
     <Box sx={{ position: "relative", display: "flex", justifyContent: "center", alignItems: "center", width: "100%", mt: 1, mb: 1 }}>
       {index == 0 ?
-        <Box sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center", width: "100%" }}>
-          <ButtonBase onClick={() => handleChangeIndex(index + 1)} sx={{ ml: 1, mr: 1 }}>
+        // <Box sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center", width: "100%" }}>
+        //   <ButtonBase onClick={() => handleChangeIndex(index + 1)} sx={{ ml: 1, mr: 1 }}>
 
-            <Typography variant="h6"><span style={{ fontWeight: 700,letterSpacing:"-2px" }}>{botName.toUpperCase()}</span> read these comments...</Typography>
+        //     <Typography variant="h6"><span style={{ fontWeight: 700,letterSpacing:"-2px" }}>{botName.toUpperCase()}</span> read these comments...</Typography>
 
-            <IconButton onClick={() => handleChangeIndex(index + 1)}>
-              <ArrowForwardIos />
-            </IconButton>
-          </ButtonBase>
-        </Box>
-
+        //     <IconButton onClick={() => handleChangeIndex(index + 1)}>
+        //       <ArrowForwardIos />
+        //     </IconButton>
+        //   </ButtonBase>
+        // </Box>
+          null
 
         :
         <Box sx={{ display: "flex", justifyContent: "flex-start", alignItems: "center", width: "100%" }}>
@@ -474,6 +481,45 @@ const SwipeToggle = (props) => {
   );
 };
 
+function PreviewSummary(props) {
+
+  const { botName, report, selectedReport, characterEmojis, handleChangeIndex, index, text } = props;
+
+  return (
+    <Box sx={{display:"flex", flexDirection:"row", m:1,  alignItems:"center", justifyContent:"flex-end"}} >
+
+    <Box sx={{maxWidth:"80%", overflow:"hidden"}}>
+    <Typography variant="h6" align="left" sx={{letterSpacing:"-2px", pl:2, color:"white"
+  }} ><b>{botName.toUpperCase()}</b>&nbsp;&nbsp;{characterEmojis[report.reportsByCharacter[selectedReport].name]} 
+  
+  <span style={{letterSpacing:0, fontSize:".9rem"}}>
+  &nbsp; read your comments...
+  </span>
+  
+  </Typography>
+
+    <div style={{ backdropFilter:"blur(10px)"}}>
+    <Card elevation={0} sx={{ borderRadius: 2, background:"#eee", p:2, opacity:.7}}>
+      <Typography variant="h5" whiteSpace="nowrap" rows={2} align="left" overflow="hidden" textOverflow="ellipsis" sx={{opacity:1, fontWeight:600}}>
+            
+            {text}
+
+           
+  
+  </Typography>
+    </Card>
+    </div>
+    </Box>
+    <Box>
+    <IconButton onClick={() => handleChangeIndex(1)}>
+              <ArrowForwardIos sx={{fill:"white"}}/>
+            </IconButton>
+            </Box>
+    </Box>
+
+  );
+
+      }
 
 function MainSummary(props) {
   // Use a regular expression to find sentence-ending punctuation and add a line break
@@ -510,7 +556,7 @@ function MainSummary(props) {
   </>
   
   )}
-  
+
 
   
 

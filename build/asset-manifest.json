@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/summy-ai/static/css/main.6a1f1d33.css",
-    "main.js": "/summy-ai/static/js/main.1eb30c7c.js",
+    "main.js": "/summy-ai/static/js/main.a29a6f6d.js",
     "static/js/787.44b4c305.chunk.js": "/summy-ai/static/js/787.44b4c305.chunk.js",
     "static/media/poppins-devanagari-400-normal.woff": "/summy-ai/static/media/poppins-devanagari-400-normal.0e11b62db931f85340d4.woff",
     "static/media/poppins-devanagari-700-normal.woff": "/summy-ai/static/media/poppins-devanagari-700-normal.0ea53bd19b062bb4b1a0.woff",
@@ -50,11 +50,11 @@
     "static/media/open-sans-greek-ext-700-normal.woff": "/summy-ai/static/media/open-sans-greek-ext-700-normal.a88214715e7736b8febd.woff",
     "index.html": "/summy-ai/index.html",
     "main.6a1f1d33.css.map": "/summy-ai/static/css/main.6a1f1d33.css.map",
-    "main.1eb30c7c.js.map": "/summy-ai/static/js/main.1eb30c7c.js.map",
+    "main.a29a6f6d.js.map": "/summy-ai/static/js/main.a29a6f6d.js.map",
     "787.44b4c305.chunk.js.map": "/summy-ai/static/js/787.44b4c305.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6a1f1d33.css",
-    "static/js/main.1eb30c7c.js"
+    "static/js/main.a29a6f6d.js"
   ]
 }
