@@ -498,7 +498,7 @@ function PreviewSummary(props) {
   
   </Typography>
 
-    <div style={{ backdropFilter:"blur(10px)"}}>
+    <div style={{ backdropFilter:"blur(10px)", borderRadius:"10px"}}>
     <Card elevation={0} sx={{ borderRadius: 2, background:"#eee", p:2, opacity:.7}}>
       <Typography variant="h5" whiteSpace="nowrap" rows={2} align="left" overflow="hidden" textOverflow="ellipsis" sx={{opacity:1, fontWeight:600}}>
             
