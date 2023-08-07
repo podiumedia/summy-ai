@@ -6,7 +6,7 @@ import Avatar from '@mui/material/Avatar';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Box, Button, ButtonBase } from '@mui/material';
-import { Comment, FavoriteBorder, Reply, Send, SendToMobile } from '@mui/icons-material';
+import { Comment, CommentOutlined, FavoriteBorder, Reply, Send, SendToMobile } from '@mui/icons-material';
 
 const TikTokCommentCard = styled(Card)(({ theme }) => ({
   width:"100%",
@@ -17,69 +17,51 @@ const TikTokCommentCard = styled(Card)(({ theme }) => ({
   },
 }));
 
-const CircularAvatar = styled(Avatar)({
+const CircularAvatar = styled(Avatar)(({ theme }) => ({
     borderRadius: '50%',
-    marginRight:"10px",
-    marginTop:"5px"
-  });
+    height:50,
+    width:50,
+    marginRight:14,
+    background:theme.palette.primary.main,
+  }));
   
 
 const TikTokComment = (props) => {
   const { username, comment, timestamp, avatar, likes, report, character, characterEmojis, botName } = props;
 
   return (
-      <TikTokCommentCard elevation={0}>
+      <Box sx={{display:"flex", flexDirection:"column", alignItems:"center", pl:2, p:2}}>
 
         
-              <Box sx={{ display: 'flex', flexDirection: "row", alignItems: 'top', p:2 }}>
+              <Box sx={{ display: 'flex', flexDirection: "row", alignItems: 'top', width:"100%"}}>
 
-                  <CircularAvatar><Comment/></CircularAvatar>
-
+                <Box sx={{display:"flex"}}>
+                  <CircularAvatar><Comment/>
+                  </CircularAvatar>
+                  </Box>
         
-                  <Box sx={{ display: 'flex', flexDirection: "column", justifyContent:"flex-start"}}>
+                  <Box sx={{ display: 'flex', flexDirection: "column", justifyContent:"flex-start", width:"100%",}}>
 
-                  <Box sx={{width:"100%" }}>
-                          <Typography variant="h6">
+                  <Box>
+                          <Typography variant="h5">
                               {username}
                           </Typography>
                           </Box>
                       
 
-                      <Box sx={{ display: "flex", flexDirection: "row", alignItems: "top"}}>
+                      <Box sx={{ display: "flex", flexDirection: "row", alignItems: "top", width:"100%"}}>
                          
-                          <Box sx={{ display:"flex", flexDirection:"column", justifyContent: "flex-start" }}>
+                          <Box sx={{ display:"flex", flexDirection:"column", justifyContent: "flex-start"}}>
                               <Typography variant="body1" component="p">
                                   {comment.text}
                               </Typography>
-
-                              <Box sx={{ display: "flex", flexDirection:"column", alignItems: "top", mt:2, ml:2}}>
-
-                                        <Box>
-                                          <Typography variant="h6"  sx={{letterSpacing:"-2px", pl:1}}>
-                                    <b>{botName.toUpperCase()}</b>&nbsp;&nbsp;{characterEmojis[character]}
-                                    </Typography>
-                                    </Box>
-
-                                    <Card elevation={0} sx={{background:"#eee", borderRadius:3, p:1}}>
-                                    <Typography variant="body1" component="p">
-                                      
-                                      <CommentSummary text={comment.commentSummary}/></Typography>
-                            
-                                    </Card>
-                                
-                                    
-
-                                </Box>
-                            
-                              {/* <Typography variant="caption" color="textSecondary" component="p">
-                          {timestamp}
-                      </Typography> */}
+                              
                           </Box>
 
 
                           <Box sx={{ flexGrow: 1 }} />
-
-                          <Box sx={{ display:"flex", justifyContent: "flex-end" }}>
+                        
+                          <Box sx={{ display:"flex"  }}>
 
                               <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", ml:2 }}>
                                   <FavoriteBorder style={{ color: "#999" }} />                                 
@@ -88,27 +70,41 @@ const TikTokComment = (props) => {
                           </Box>
                   </Box>
 
-     
+                  </Box>
+                  </Box>   
 
+                  <Box sx={{ display: "flex", flexDirection:"column", alignItems: "top", mt:2}}>
+
+<Card elevation={0} sx={{background:"#eee", borderRadius:3, p:2}}>
+<Typography variant="body1" component="p">
+   <b>SIFTSY SAYS...</b><br/>   
+  <CommentSummary text={comment.commentSummary}/></Typography>
+
+</Card>
+
+
+
+</Box>
              
 
               <Box sx={{display:"flex", width:"100%", mt:1}}>
                     <Box sx={{ flexGrow: 1 }} />
                     <Button endIcon={<SendToMobile/>} onClick={() => window.open(comment.videoWebUrl + "#:~:text=" + comment.text, "_blank")}
-                    sx={{color:"#666", textTransform:"none"}}
+                    color="primary"
+                    sx={{fontWeight:900, textTransform:"none"}}
                      size="small">Go To Comment</Button>
                 </Box>
 
-              </Box>                  
+                        
               
 
-              </Box>
+          
 
 
 
 
             
-      </TikTokCommentCard>
+      </Box>
   );
 };
 

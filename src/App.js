@@ -1,7 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
 import React from 'react';
-import { ButtonBase, Card, Container, Grid } from '@mui/material';
+import { ButtonBase, Card, Container, Divider, Grid } from '@mui/material';
 import Summary from './Summary';
 import ReactPlayer from 'react-player';
 import report from './testreport.json';
@@ -21,23 +20,24 @@ import '@fontsource/poppins/700.css'; // Import the Poppins font
 import '@fontsource/open-sans'; // Import the Open Sans font
 import '@fontsource/open-sans/700.css'; // Import the Open Sans font
 
+import '@fontsource-variable/red-hat-display'; // Import the Red Hat Display font
+// import '@fontsource/questrial/700.css';
+
 
 const botName = "SUMMY";
 
 
 const characterEmojis = {
-  "Supportive": "🤗",
+  "Supportive": "😊", 
   "Professional": "🤓",
-  "Critical": "😡"
+  "Critical": "😪"
 };
 
 
 const theme = createTheme({
   typography: {
     fontFamily: [
-      'Poppins',
-      "Open Sans",
-      "Roboto",
+      "Red Hat Display Variable",
       'sans-serif',
     ].join(','),
     caption: {
@@ -51,23 +51,23 @@ const theme = createTheme({
       color:"#222",
     },
     h5: {
-      fontSize: '1rem',
+      fontSize: '1.4rem',
+      color:"#222",
+      fontWeight: 900,
     },
     h6: {
-      fontSize: '1.1rem',
-      color:"#222",
-      fontWeight: 700,
+      fontSize: '1.4rem',
+      fontWeight: 900,
+      color:"#005AE0"
     },
     body2: {
       fontSize: '0.875rem',
       lineHeight: 1.66,
     },
     body1: {
-      fontSize: '.95rem',
+      fontSize: '1.2rem',
       fontFamily: [
-        'Open Sans',
-        'Poppins',
-        "Roboto",
+        "Red Hat Display Variable",
         'sans-serif',
       ].join(','),
       color:"#222"
@@ -75,9 +75,7 @@ const theme = createTheme({
     subtitle1: {
       fontSize: '1rem',
       fontFamily: [
-        'Open Sans',
-        'Poppins',
-        "Roboto",
+        "Red Hat Display Variable",
         'sans-serif',
       ].join(','),
     }
@@ -86,22 +84,54 @@ const theme = createTheme({
 
   palette: {
     primary: {
-      main: '#8a23fe', // Custom primary color
+      main: '#005AE0', // Custom primary color
     },
     secondary: {
-      main: '#f44336', // Custom secondary color
+      main: '#B7FF70', // Custom secondary color
     },
   },
 });
+
+
+const StyledButton = muiStyled(ButtonBase)(({ theme }) => ({
+  borderRadius:30,
+  background: `linear-gradient(to right, ${theme.palette.secondary.main}, ${theme.palette.secondary.main})`,
+  fontFamily: [
+    "Red Hat Display Variable",
+    'sans-serif',
+  ].join(','),
+  fontSize: '1rem',
+  fontWeight : 900,
+  // letterSpacing:".5px",
+  color: theme.palette.primary.main,
+  padding: "15px 0px",
+  width: "100%",
+  boxShadow: '0px 3px 5px 0px rgba(0,0,0,0.4)',
+}));
+
+const NamePlate = muiStyled(Typography)(({ theme }) => ({
+  borderRadius:30,
+  background: `linear-gradient(to right, ${theme.palette.secondary.main}, ${theme.palette.secondary.main})`,
+  fontFamily: [
+    "Red Hat Display Variable",
+    'sans-serif',
+  ].join(','),
+  fontSize: '1rem',
+  fontWeight : 900,
+  // letterSpacing:".5px",
+  color: theme.palette.primary.main,
+  padding: "15px 0px",
+  width: "100%",
+}));
 
 // Custom styles for the Slider
 const CustomSlider = muiStyled(Slider)(({ theme }) => ({
 
   '& .MuiSlider-thumb': {
-    height: 25,
-    width: 25,
+    height: 30,
+    width: 30,
     backgroundColor: '#fff',
-    border: `2px solid ${theme.palette.primary.main}`,
+    border: `4px solid ${theme.palette.primary.main}`,
     // marginTop: -8,
     // marginLeft: -12,
     // '&:focus, &:hover, &$active': {
@@ -111,6 +141,7 @@ const CustomSlider = muiStyled(Slider)(({ theme }) => ({
 
   '& .MuiSlider-valueLabel': {
     left: 'calc(-50% + 6px)',
+    background:"transparent",
   },
 
   // '& .MuiSlider-track': {
@@ -119,10 +150,10 @@ const CustomSlider = muiStyled(Slider)(({ theme }) => ({
   // },
 
   '& .MuiSlider-rail': {
-    height: 10,
-    borderRadius: 5,
+    height: 25,
+    borderRadius: 30,
     opacity: 1,
-    background: 'linear-gradient(to right, #008547, orange, #960000)',
+    background: 'linear-gradient(to right, #B7FF70, #FFEC3E, #FF7A7A)',
   },
 }));
 
@@ -190,8 +221,8 @@ const onTouchEnd = () => {
 
   }, []);
 
-  let scaleFactor = (width / 330) < 1.8 ? (width / 330) : 1.8;
-  let heightFactor = 1.2;
+  let scaleFactor = (width / 330) < 1.4 ? (width / 330) : 1.4;
+  let heightFactor = .8;
 
   return (
     <div style={{
@@ -204,7 +235,7 @@ const onTouchEnd = () => {
           <FullPage>
 
 
-            <AppBar className="appBar" position="static" sx={{
+            {/* <AppBar className="appBar" position="static" sx={{
              background:"transparent"
             }} elevation={0} variant="outlined">
               <Toolbar>
@@ -223,16 +254,16 @@ const onTouchEnd = () => {
 
                 </Typography>
                 <Box sx={{ flexGrow: 1 }} />
-                {/* <Typography variant="h6" >
-          {report.creator.username}
-        </Typography> */}
+     
         <Typography variant="body1" >
                COMMENTS SUMMARY DEMO
         </Typography>
               </Toolbar>
-            </AppBar>
+            </AppBar> */}
 
-
+            <Box sx={{display:"flex", justifyContent:"center", alignItems:"center", pt:5}}>
+              <img src={process.env.PUBLIC_URL + "/siftsy_logo.png"} alt="image" style={{ height: 50 }} />
+            </Box>
 
 
 
@@ -247,16 +278,22 @@ const onTouchEnd = () => {
                 width: width,
                 height: "95vh",
                 // height: 722*heightFactor,
-                overflowX: "hidden",
+                overflow: "hidden",
+                zIndex:5,
+              
                 
               }}>
 
-              <div style={{position:"absolute", top:0, left:0, width:"100%", height:"fit-content", zIndex:10, cursor:"pointer",
+              {/* <div style={{position:"absolute", top:0, left:0, width: width, height:"fit-content", zIndex:10, cursor:"pointer", 
             }} onClick={() => handleChangeIndex(index == 0 ? 1 : 0)}>
+              
               <PreviewSummary text={report.reportsByCharacter[selectedReport].summary} index={index} handleChangeIndex={handleChangeIndex} botName={botName} report={report} selectedReport={selectedReport} characterEmojis={characterEmojis} />
-              </div>
+              </div> */}
 
 
+
+
+                <div style={{width: "fit-content", height:722 * heightFactor, zIndex:10, borderRadius:20, overflow:"hidden", margin:"0 auto"}}>
 
                 <iframe
 
@@ -266,8 +303,23 @@ const onTouchEnd = () => {
                   width="100%"
                   height={722 * heightFactor}
                   //remove scroll bar   
-                  style={{ transform: `scale(${scaleFactor})`, transformOrigin: "top", overflowY: "scroll", overflowX: "hidden" }}
+                  scrolling="no"
+                  style={{ 
+                    
+                    // transform: `scale(${scaleFactor})`, transformOrigin: "top", 
+                  
+                  
+                    overflow:"hidden"    }}
                 ></iframe>
+
+              </div>
+
+
+
+
+            <Box sx={{display:"flex", justifyContent:"center", alignItems:"center", p:5}}>
+              <StyledButton variant="contained" onClick={() => handleChangeIndex(index == 0 ? 1 : 0)}>{index == 0 ? "Siftsy My Comments" : "View Summary"}</StyledButton>
+            </Box>
 
               <Box>
               <SwipeToggle index={index} handleChangeIndex={handleChangeIndex} />
@@ -280,11 +332,8 @@ const onTouchEnd = () => {
                 margin: "0 auto", width: "100%", height: "95vh",
                 overflowX: "hidden"
 
-
-
               }}>
 
-              <SwipeToggle index={index} handleChangeIndex={handleChangeIndex} />
 
                 <CharacterPicker selectedReport={selectedReport} setSelectedReport={setSelectedReport} characters={characterEmojis} />
 
@@ -295,10 +344,10 @@ const onTouchEnd = () => {
 
                     
 
-                    <Typography variant="h6" align="left" sx={{letterSpacing:"-2px", pl:2}} ><b>{botName.toUpperCase()}</b>&nbsp;&nbsp;{characterEmojis[report.reportsByCharacter[selectedReport].name]} </Typography>
+                    <Typography variant="h6" align="left">TL;DR </Typography>
 
-                    <Card elevation={0} sx={{ borderRadius: 2, background:"#eee", p:2}}>
-                      <Typography variant="h5">
+                    <Card elevation={0} sx={{ borderRadius: 2, background:"#eee", p:3}}>
+                      <Typography variant="body1">
 
                         <MainSummary text={report.reportsByCharacter[selectedReport].summary} />
 
@@ -310,8 +359,9 @@ const onTouchEnd = () => {
 
                 </Card>
 
+                <Divider variant="middle"/>
 
-                <Card variant="outlined" sx={{pt:2, border:"2px solid #ddd", borderRadius:2}}>
+                <Card elevation={0} sx={{pt:2}}>
                  
                  
                  
@@ -322,12 +372,12 @@ const onTouchEnd = () => {
 
                   <Box>
 
-                  <Typography variant="h6" align="left" sx={{letterSpacing:"-2px", ml:4}} ><b>{botName.toUpperCase()}</b>&nbsp;&nbsp;{characterEmojis[report.reportsByCharacter[selectedReport].name]} </Typography>
+                  <Typography variant="h6" align="left" sx={{ml:4,mr:4}}>COMMENTS </Typography>
                
 
-                <Card elevation={0} sx={{ borderRadius: 2, background:"#eee", p:1, mr:3, ml:3 }}>
+                <Card elevation={0} sx={{ p:1, mr:3, ml:3 }}>
               
-                    <Typography ariant="body1" component="p" align="left" >{`Here are the top comments that ${report.reportsByCharacter[selectedReport].highlightedReason}... `}
+                    <Typography variant="body1" component="p" align="left" >{`Here are the top comments that ${report.reportsByCharacter[selectedReport].highlightedReason}... `}
                                         
                     </Typography>
                
@@ -359,6 +409,7 @@ const onTouchEnd = () => {
                           botName={botName}
                         />
 
+                      <Divider variant="middle"/>
 
 
                       </Box>
@@ -369,11 +420,16 @@ const onTouchEnd = () => {
 
                   </Box>
                 </Card>
+
+
+                <SwipeToggle index={index} handleChangeIndex={handleChangeIndex} />
+
               
               </div>
 
 
             </SwipeableViews>
+
 
           </FullPage>
         </ThemeProvider>
@@ -404,8 +460,8 @@ const CharacterPicker = (props) => {
         {characterOptions.map((character, index) => (
           <Grid item xs={4}>
 
-            <Typography align="center" onClick={() => setSelectedReport(index)} variant={Object.keys(characters)[selectedReport] == character.label ? "h6" : "subtitle1"}
-              style={{ fontWeight: Object.keys(characters)[selectedReport] == character.label ? 700 : null }}
+            <Typography color="primary" align="center" onClick={() => setSelectedReport(index)} variant={Object.keys(characters)[selectedReport] == character.label ? "h6" : "subtitle1"}
+              style={{ fontWeight: Object.keys(characters)[selectedReport] == character.label ? 900 : 700 }}
 
             >
 
@@ -420,25 +476,17 @@ const CharacterPicker = (props) => {
         ))}
       </Grid>
 
-      <div style={{ width: "70%", margin: "0 auto" }}>
+      <div style={{ width: "70%", margin: "0 auto", paddingTop:"10px" }}>
         <CustomSlider
           value={selectedReport}
           onChange={handleCharacterChange}
           step={1}
-          marks
+          
           min={0}
           max={2}
           track={false}
           valueLabelFormat={valueLabelFormat}
-          sx={{
-            '& .MuiSlider-thumb': {
-              backgroundColor: '#ffffff', // Set thumb color to transparent
-              boxShadow: 'none', // Remove thumb shadow
-            },
-            '& .MuiSlider-track': {
-              backgroundColor: '#ffffff', // Set track color to transparent
-            },
-          }}
+        
         />
       </div>
     </div>
@@ -469,7 +517,7 @@ const SwipeToggle = (props) => {
             <IconButton onClick={() => handleChangeIndex(index - 1)}>
               <ArrowBackIos />
             </IconButton>
-            <Typography variant="h6">Back to Video</Typography>
+            <Typography variant="h6">Back</Typography>
           </ButtonBase>
 
         </Box>
@@ -500,7 +548,7 @@ function PreviewSummary(props) {
 
     <div style={{ backdropFilter:"blur(10px)", borderRadius:"10px"}}>
     <Card elevation={0} sx={{ borderRadius: 2, background:"#eee", p:2, opacity:.7}}>
-      <Typography variant="h5" whiteSpace="nowrap" rows={2} align="left" overflow="hidden" textOverflow="ellipsis" sx={{opacity:1, fontWeight:600}}>
+      <Typography variant="body1" whiteSpace="nowrap" rows={2} align="left" overflow="hidden" textOverflow="ellipsis" sx={{opacity:1, fontWeight:600}}>
             
             {text}
 
@@ -540,7 +588,7 @@ function MainSummary(props) {
         // fontSize: index == 0 ? "1.4rem" : null 
         
         }}>{line}
-       {index == 0 && !more ? <span onClick={() => setMore(!more)}>.. <span style={{fontWeight:700, color:"#666", cursor:"pointer"}}>more</span></span> : " "}
+       {index == 0 && !more ? <span onClick={() => setMore(!more)}>.. <span style={{fontWeight:900, color:"#333", cursor:"pointer"}}>more</span></span> : " "}
       <br />
       </span>
     </React.Fragment>
@@ -550,7 +598,7 @@ function MainSummary(props) {
   
   <Box sx={{display:"flex", justifyContent:"center", alignItems:"center", width:"100%"}}>
     <Box sx={{flexGrow:1}}/>
-  <span onClick={() => setMore(!more)}><br/><span style={{fontWeight:700, color:"#666",  cursor:"pointer"}}>less</span></span> 
+  <span onClick={() => setMore(!more)}><br/><span style={{fontWeight:900, color:"#333",  cursor:"pointer"}}>less</span></span> 
   </Box> : null}
  
   </>
@@ -559,6 +607,8 @@ function MainSummary(props) {
 
 
   
+
+
 
 
 export default App;
